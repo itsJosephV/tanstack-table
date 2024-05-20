@@ -26,7 +26,7 @@ const Table = ({ data, column, tableContext }) => {
   const [sorting, setSorting] = useState([]);
   const [filtering, setFiltering] = useState("");
   const [rowSelection, setRowSelection] = useState({});
-  //const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openCellModal, setOpenCellModal] = useState(null);
 
   const table = useReactTable({
     data: data,
@@ -40,6 +40,18 @@ const Table = ({ data, column, tableContext }) => {
     onGlobalFilterChange: setFiltering,
     onRowSelectionChange: setRowSelection,
     getRowId: (row) => row.id,
+    meta: {
+      handleClick: () => {
+        console.log("clicked");
+      },
+      setFiltering,
+      handleCellModal: (id, open) => {
+        setOpenCellModal(open ? id : null);
+      },
+      isCellModalOpen: (id) => openCellModal === id,
+      closeCellModal: () => setOpenCellModal(null),
+      openCellModal,
+    },
   });
 
   const currentPage = table.getState().pagination.pageIndex;
@@ -80,7 +92,7 @@ const Table = ({ data, column, tableContext }) => {
     <div className="flex flex-col gap-2.5">
       {/**Top bar Component start */}
 
-      <TableTopBar tableContext={tableContext} setFiltering={setFiltering} />
+      <TableTopBar tableContext={tableContext} table={table} />
       {/**Top bar Component end */}
       {/**Table Component start */}
       <div className="border border-stone-200 rounded-md overflow-hidden">
