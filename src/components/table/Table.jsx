@@ -45,8 +45,8 @@ const Table = ({ data, column, tableContext }) => {
         console.log("clicked");
       },
       setFiltering,
-      handleCellModal: (id, open) => {
-        setOpenCellModal(open ? id : null);
+      handleCellModal: (id) => {
+        setOpenCellModal(id);
       },
       isCellModalOpen: (id) => openCellModal === id,
       closeCellModal: () => setOpenCellModal(null),
@@ -84,9 +84,11 @@ const Table = ({ data, column, tableContext }) => {
     desc: <ArrowDownIcon />,
   };
 
+  console.log(openCellModal);
+
   useEffect(() => {
-    console.log(rowSelection);
-  }, [rowSelection]);
+    console.log(openCellModal, "from Table component");
+  }, [openCellModal]);
 
   return (
     <div className="flex flex-col gap-2.5">
