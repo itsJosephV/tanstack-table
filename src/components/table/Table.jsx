@@ -20,13 +20,11 @@ import { ArrowUpIcon } from "../../icons/ArrowUp";
 import { ArrowDownIcon } from "../../icons/ArrowDown";
 import { cn } from "../../utils/cn";
 import TableTopBar from "./TableTopBar";
-import { useEffect } from "react";
 
 const Table = ({ data, column, tableContext }) => {
   const [sorting, setSorting] = useState([]);
   const [filtering, setFiltering] = useState("");
   const [rowSelection, setRowSelection] = useState({});
-  const [openCellModal, setOpenCellModal] = useState(null);
 
   const table = useReactTable({
     data: data,
@@ -41,16 +39,7 @@ const Table = ({ data, column, tableContext }) => {
     onRowSelectionChange: setRowSelection,
     getRowId: (row) => row.id,
     meta: {
-      handleClick: () => {
-        console.log("clicked");
-      },
       setFiltering,
-      handleCellModal: (id) => {
-        setOpenCellModal(id);
-      },
-      isCellModalOpen: (id) => openCellModal === id,
-      closeCellModal: () => setOpenCellModal(null),
-      openCellModal,
     },
   });
 
@@ -83,12 +72,6 @@ const Table = ({ data, column, tableContext }) => {
     asc: <ArrowUpIcon />,
     desc: <ArrowDownIcon />,
   };
-
-  console.log(openCellModal);
-
-  useEffect(() => {
-    console.log(openCellModal, "from Table component");
-  }, [openCellModal]);
 
   return (
     <div className="flex flex-col gap-2.5">

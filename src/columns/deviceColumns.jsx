@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import { createColumnHelper } from "@tanstack/react-table";
 import { Modal } from "../components/table/Modal";
+import EditSensorForm from "../components/forms/EditSensorForm";
 
 const columnHelper = createColumnHelper();
 
@@ -43,35 +45,19 @@ export const deviceColumns = [
   }),
   columnHelper.accessor("sensor", {
     header: "Sensor",
-    cell: ({ column, table, cell }) => {
+    //table
+    cell: ({ column, cell }) => {
       const rowId = cell.row.id;
       const header = column.columnDef.header;
-      //const isOpen = table.options.meta.isCellModalOpen(rowId);
-      console.log(table.options.meta?.openCellModal === rowId, "from column");
       return (
         <>
-          <Modal
-            key={rowId}
-            open={table.options.meta?.openCellModal === rowId}
-            onOpenChange={(isOpen) => {
-              console.log(isOpen, "isOpenChange");
-              table.options.meta?.handleCellModal(isOpen ? rowId : null);
-            }}
-          >
-            <Modal.Button asChild>
-              <button
-                onClick={() => table.options.meta?.handleCellModal(rowId)}
-                className="inline-flex text-emerald-700 p-0.5 bg-emerald-200 rounded-md px-2.5"
-              >
-                {`Edit ${header}`}
-              </button>
+          <Modal>
+            <Modal.Button className="inline-flex text-emerald-700 p-0.5 bg-emerald-200 rounded-md px-2.5">
+              {`Edit ${header}`}
             </Modal.Button>
 
-            <Modal.Content
-              title="Edit sensor"
-              onClose={table.options.meta?.closeCellModal}
-            >
-              <div>{`Modal for sensor ${rowId}`}</div>
+            <Modal.Content title="Edit sensor">
+              <EditSensorForm rowId={rowId} />
             </Modal.Content>
           </Modal>
         </>
