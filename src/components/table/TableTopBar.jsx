@@ -1,10 +1,12 @@
+import CreateDeviceForm from "../forms/CreateDeviceForm";
+import CreateUserForm from "../forms/CreateUserForm";
+import { Modal } from "./Modal";
+
 /* eslint-disable react/prop-types */
 const TableTopBar = ({ tableContext, table }) => {
   const handleInputOnChange = (e) => {
     table.options.meta?.setFiltering(e.target.value);
   };
-
-  const { handleModal } = table.options.meta;
 
   return (
     <div className="bg-stone-200 p-3 py-3.5 rounded-md border flex justify-between items-center">
@@ -21,12 +23,19 @@ const TableTopBar = ({ tableContext, table }) => {
         >
           {`Edit ${tableContext}`}
         </button>
-        <button
-          onClick={handleModal}
-          className="bg-stone-300 py-1.5 px-3 rounded-md"
-        >
-          {`Create ${tableContext}`}
-        </button>
+        <Modal>
+          <Modal.Button className="bg-stone-300 py-1.5 px-3 rounded-md">
+            {`Create ${tableContext}`}
+          </Modal.Button>
+          {/**
+           * Add the needed forms in Modal.Content and render according
+           * to the tableContext
+           */}
+          <Modal.Content title={`Create ${tableContext}`}>
+            {tableContext === "device" && <CreateDeviceForm />}
+            {tableContext === "user" && <CreateUserForm />}
+          </Modal.Content>
+        </Modal>
         <button
           onClick={() => console.log("delete item/s")}
           className="bg-stone-300 py-1.5 px-3 rounded-md"

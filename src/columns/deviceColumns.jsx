@@ -7,7 +7,7 @@ const columnHelper = createColumnHelper();
 
 export const deviceColumns = [
   columnHelper.accessor("", {
-    id: "select-col",
+    id: "select-device-col",
     header: ({ table }) => {
       return (
         <input

@@ -117,10 +117,11 @@ const Table = ({ data, column, tableContext }) => {
             {table.getRowModel().rows.length > 0 ? (
               table.getRowModel().rows.map((row) => (
                 <tr className="odd:bg-stone-100" key={row.id}>
-                  {row.getVisibleCells().map((cell, index) => (
+                  {row.getVisibleCells().map((cell) => (
                     <td
                       className={cn("text-left text-stone-500 px-4 py-3", {
-                        "text-stone-700": index === 0,
+                        "text-stone-700":
+                          cell.column.columnDef.header === "Name",
                       })}
                       key={cell.id}
                     >

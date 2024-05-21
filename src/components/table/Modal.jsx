@@ -1,12 +1,8 @@
 /* eslint-disable react/prop-types */
 import * as Dialog from "@radix-ui/react-dialog";
 
-export const Modal = ({ children, open, onOpenChange }) => {
-  return (
-    <Dialog.Root open={open} onOpenChange={onOpenChange}>
-      {children}
-    </Dialog.Root>
-  );
+export const Modal = ({ children }) => {
+  return <Dialog.Root>{children}</Dialog.Root>;
 };
 
 const ModalContent = ({ children, title }) => {
