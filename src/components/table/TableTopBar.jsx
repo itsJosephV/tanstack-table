@@ -32,8 +32,8 @@ const TableTopBar = ({ tableContext, table }) => {
            * to the tableContext
            */}
           <Modal.Content title={`Create ${tableContext}`}>
-            {tableContext === "device" && <CreateDeviceForm />}
-            {tableContext === "user" && <CreateUserForm />}
+            {tableContext === "device" && <CreateDeviceForm table={table} />}
+            {tableContext === "user" && <CreateUserForm table={table} />}
           </Modal.Content>
         </Modal>
         <button
