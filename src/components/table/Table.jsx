@@ -84,7 +84,7 @@ const Table = ({ data, column, tableContext }) => {
         <table className="w-full">
           <thead className="bg-stone-200">
             {table.getHeaderGroups().map((headerGroup) => (
-              <tr className="" key={headerGroup.id}>
+              <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <th
                     className={cn(

@@ -47,8 +47,13 @@ export const deviceColumns = [
     header: "Sensor",
     //table
     cell: ({ column, cell }) => {
-      const rowId = cell.row.id;
+      // table
+      //const rowId = cell.row.id;
       const header = column.columnDef.header;
+      const rowData = cell.row.original;
+      // console.log(table.options.data); // whole table data
+      // console.log(cell.row.original); // cell data
+      // console.log(cell.row.original); // cell data
       return (
         <>
           <Modal>
@@ -56,8 +61,8 @@ export const deviceColumns = [
               {`Edit ${header}`}
             </Modal.Button>
 
-            <Modal.Content title="Edit sensor">
-              <EditSensorForm rowId={rowId} />
+            <Modal.Content title="Edit and add sensors">
+              <EditSensorForm rowData={rowData} />
             </Modal.Content>
           </Modal>
         </>
